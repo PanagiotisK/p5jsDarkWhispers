@@ -43,17 +43,20 @@ function draw() {
 
 			chroma += luma;
 		}
-		chromaAvg = chroma / (capture.width * capture.height);
-
-		let chromaVolume = Math.floor(map(chromaAvg, 0, 0.35, 100, 0));
-		if (chromaVolume < 50)
-			volume = 0;
-		else
-			volume = map(chromaVolume, 50, 100, 0, 1);
-
-		sound.setVolume(volume);
-		chroma = 0;
 	}
+	chromaAvg = chroma / (width * height);
+
+	let chromaVolume = Math.floor(map(chromaAvg, 0, 50, 100, 0));
+	if (chromaVolume < 50)
+		volume = 0;
+	else
+		volume = map(chromaVolume, 50, 100, 0, 1);
+	
+	// console.log(chromaAvg + " / " + chromaVolume + " / " + volume);
+
+	sound.setVolume(volume);
+	chroma = 0;
+
 	capture.updatePixels();
 
 	push();
